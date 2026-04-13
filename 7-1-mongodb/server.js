@@ -57,7 +57,7 @@
  * TODO-6 Insert Documents
  * ============================================
  *   - 6.1: In cmd write the following commands: 
- *      - db.students.insertMany([
+ *      - db.student.insertMany([
             { name: "Ali", age: 21, major: "CS" },
             { name: "Sara", age: 23, major: "SE" } ])
  *    Note: Take a single screen shot of the Todo 6.1 and save it in Mongo-Screen-shots/TODO-6
@@ -65,21 +65,21 @@
  * TODO-7 Read Documents
  * ============================================
  *   - In cmd write the following commands: 
- *      - 7.1:  db.students.find()               // all
- *      - 7.2: db.students.find({ age: { $gt: 21 } })  // filtered
+ *      - 7.1:  db.student.find()               // all
+ *      - 7.2: db.student.find({ age: { $gt: 21 } })  // filtered
  *   Note: Take a single screen shot of the Todo 7.1 & 7.2 and save it in Mongo-Screen-shots/TODO-7
  * ============================================
  * TODO-8 Update & Delete
  * ============================================
  *   - In cmd write the following commands: 
- *      - 8.1:  db.students.updateOne({ name: "Ali" }, { $set: { age: 22 } }) 
- *      - 8.2: db.students.deleteOne({ name: "Sara" })
+ *      - 8.1:  db.student.updateOne({ name: "Ali" }, { $set: { age: 22 } })
+ *      - 8.2: db.student.deleteOne({ name: "Sara" })
  *    Note: Take a single screen shot of the Todo 8.1 & 8.2 and save it in Mongo-Screen-shots/TODO-8
  * ============================================
  * TODO-9 Quick Check
  * ============================================
  *   - In cmd write the following commands: 
- *      - 9.1: db.students.find().pretty()
+ *      - 9.1: db.student.find().pretty()
  *      - 9.2: Should show only Ali, age = 22.
  *    Note: Take a single screen shot of the Todo 9.1 & 9.2 and save it in Mongo-Screen-shots/TODO-9
  * ================================================================================================================
@@ -185,15 +185,37 @@
  */
 
 // import mongoose
+import mongoose from "mongoose";
+
 
 // establish connection
+const uri = "mongodb+srv://alawamibatool3:0562844022@cluster0.rjkajda.mongodb.net/TestDB?appName=Cluster0";
 
+mongoose.connect(uri)
+  .then(() => {
+    console.log("Connected to MongoDB successfully");
+  })
+  .catch((error) => {
+    console.log("Connection error:", error);
+  });
 
 // define schema
-
+const studentSchema = new mongoose.Schema({
+         name: String,
+         age: Number,
+         major: String
+      });
+      const Student = mongoose.model("Student", studentSchema);
 
 // create document
-
+async function createStudents() {
+      await Student.insertMany([
+         { name: "Ali", age: 21, major: "CS" },
+         { name: "Sara", age: 23, major: "SE" }
+      ]);
+      console.log("✅ Inserted");
+      }
+      createStudents();
 
 // read document
 
