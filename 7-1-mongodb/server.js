@@ -16,7 +16,7 @@
  * - 1.3: choose free plan to create cluster
  * - 1.4: Name the cluster cluster0
  * - 1.5: choose AWS as provider
- * - 1.6: choose region Bahrain
+ * - 1.6: choose region Singapore (ap-southeast-1)
  * - 1.7: click on the button "create deployment"
  *
  *================================================================
